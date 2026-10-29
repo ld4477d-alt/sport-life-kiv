@@ -27,9 +27,21 @@ jobs:
           pip install buildozer
           pip install "pyjnius>=1.4.0"
 
+      - name: Install Android Build-Tools and accept licenses
+        run: |
+          SDKMANAGER=$(find ~/.buildozer -name sdkmanager | head -n 1)
+          if [ -z "$SDKMANAGER" ]; then
+            SDKMANAGER=~/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager
+          fi
+          
+          yes | $SDKMANAGER --licenses || true
+          $SDKMANAGER "build-tools;34.0.0" || true
+          
+          echo "$HOME/.buildozer/android/platform/android-sdk/build-tools/34.0.0" >> $GITHUB_PATH
+
       - name: Build APK with Buildozer
         run: |
-          buildozer -v android debug
+          echo y | buildozer -v android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
