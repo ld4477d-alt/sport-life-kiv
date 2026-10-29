@@ -13,15 +13,11 @@ from screens.favorites import FavoritesScreen
 from screens.orders import OrdersScreen
 from screens.users import UsersScreen
 
-# ==========================================
-# НАСТРОЙКА API ДЛЯ ТЕЛЕФОНА
-# ==========================================
-# Если запускаем на компьютере (Windows/Linux) - используем localhost
-# Если на телефоне (Android) - используем IP-адрес компьютера в сети
+
 if platform == 'android':
-    API_URL = "http://192.168.3.75:8000"  # <-- ТВОЙ IP-АДРЕС
+    API_URL = "http://192.168.3.75:8000"  
 else:
-    API_URL = "http://127.0.0.1:8000"
+    API_URL = "http://127.0.0.1:8000"     
 
 Window.size = (360, 640)
 CURRENT_TOKEN = None
