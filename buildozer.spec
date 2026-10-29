@@ -9,7 +9,7 @@ source.include_patterns = screens/*.py
 
 version = 0.1
 
-requirements = python3,kivy,requests,jnius
+requirements = python3,kivy,requests,pyjnius
 
 orientation = portrait
 fullscreen = 1
