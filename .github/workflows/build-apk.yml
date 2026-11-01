@@ -15,25 +15,23 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.9'
 
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          # Устанавливаем всё необходимое, КРОМЕ libtinfo5 (его нет в Ubuntu 24.04)
+          # Устанавливаем всё необходимое
           sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses-dev cmake libffi-dev libssl-dev
           
-          # Скачиваем libtinfo5 с рабочего зеркала Launchpad (не 404)
+          # Скачиваем libtinfo5 (нужен для сборки)
           curl -O http://launchpadlibrarian.net/648013231/libtinfo5_6.4-2_amd64.deb
-          
-          # Устанавливаем вручную
           sudo dpkg -i libtinfo5_6.4-2_amd64.deb
 
       - name: Install Buildozer
         run: |
           pip install buildozer
           pip install cython==0.29.33
-          pip install "jnius>=1.4.0"
+          # УДАЛЕНА строка pip install "jnius>=1.4.0" - она вызывала ошибку!
 
       - name: Build APK with Buildozer
         run: |
