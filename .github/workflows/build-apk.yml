@@ -24,12 +24,12 @@ jobs:
           curl -O http://launchpadlibrarian.net/648013231/libtinfo5_6.4-2_amd64.deb
           sudo dpkg -i libtinfo5_6.4-2_amd64.deb
 
-      - name: Accept Android SDK licenses and install build-tools
+      - name: Force accept Android SDK licenses
         run: |
-          # Автоматически принимаем все лицензии SDK
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
-          # Принудительно устанавливаем build-tools (номер версии можно изменить на требуемый)
-          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;34.0.0" || true
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || true
+          mkdir -p $ANDROID_HOME/licenses
+          echo -e "\n8933bad161af4b6a5b573652ffc7aaf3aee85a47" > $ANDROID_HOME/licenses/android-sdk-license
+          echo -e "\nd56f5187479451eabf01fb78af6dfcb131b33910" > $ANDROID_HOME/licenses/android-sdk-preview-license
 
       - name: Install Buildozer
         run: |
@@ -38,7 +38,7 @@ jobs:
 
       - name: Build APK with Buildozer
         run: |
-          buildozer -v android debug
+          echo y | buildozer -v android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
