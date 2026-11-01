@@ -11,8 +11,7 @@ source.include_exts = py,png,jpg,kv,atlas,ttf,json
 version = 1.0
 
 # Зависимости. Добавлены requests и все нужное для работы с сетью
-requirements = python3,kivy==2.3.0,requests,urllib3,chardet,idna,certifi,openssl
-
+requirements = python3==3.10.12,kivy==2.3.0,hostpython3==3.10.12,pyjnius==1.5.0
 orientation = portrait
 fullscreen = 0
 log_level = 2
