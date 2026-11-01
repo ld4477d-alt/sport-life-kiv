@@ -1,20 +1,32 @@
 [app]
-title = Sport Life
+# Название приложения
+title = SportLife
 package.name = sportlife
-package.domain = org.sportlife
+package.domain = ru.sportlife
 
 source.dir = .
-source.include_exts = py,png,jpg,kv,atlas,json,txt
-source.include_patterns = screens/*.py
+# Какие файлы включить в сборку
+source.include_exts = py,png,jpg,kv,atlas,ttf,json
 
-version = 0.1
+version = 1.0
 
-requirements = python3,kivy,requests,pyjnius
+# Зависимости. Добавлены requests и все нужное для работы с сетью
+requirements = python3,kivy==2.3.0,requests,urllib3,chardet,idna,certifi,openssl
 
 orientation = portrait
-fullscreen = 1
+fullscreen = 0
+log_level = 2
 
-android.permissions = INTERNET
+# Разрешения для Android (Интернет обязателен для работы с API)
+android.permissions = INTERNET, ACCESS_NETWORK_STATE
+
 android.api = 33
 android.minapi = 21
 android.ndk = 25b
+
+# Архитектуры процессоров (для современных и старых телефонов)
+android.archs = arm64-v8a, armeabi-v7a
+
+[buildozer]
+log_level = 2
+warn_on_root = 1
